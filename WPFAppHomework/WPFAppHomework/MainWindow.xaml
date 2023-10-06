@@ -1,0 +1,30 @@
+﻿<Window x:Class="WPFAppHomework.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="WPF App" Height="350" Width="525">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Imie:" Grid.Row="0" Grid.Column="0" Margin="5"/>
+        <TextBox x:Name="NameTextBox" Grid.Row="0" Grid.Column="1" Margin="5"/>
+
+        <Label Content="Nazwisko:" Grid.Row="1" Grid.Column="0" Margin="5"/>
+        <TextBox x:Name="SurnameTextBox" Grid.Row="1" Grid.Column="1" Margin="5" />
+
+        <Label Content="Data urodzenia:" Grid.Row="2" Grid.Column="0" Margin="5"/>
+        <DatePicker x:Name="DateOfBirthPicker" Grid.Row="2" Grid.Column="1" Margin="5"/>
+
+        <Button Content="Wyświetl" Click="DisplayButton_Click" Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="5"/>
+        <Label Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="5" Content="" x:Name="ResultLabel"/>
+    </Grid>
+</Window>

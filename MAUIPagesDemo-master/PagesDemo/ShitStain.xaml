@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PagesDemo.ShitStain"
+            xmlns:local="clr-namespace:PagesDemo"
+             Title="NWD"
+            BarBackgroundColor="DarkBlue"
+            BarTextColor="LightSalmon"
+            
+>
+
+    <ContentPage Title="NWD" IconImageSource="dotnet_bot.svg">
+        <VerticalStackLayout Spacing="30" VerticalOptions="Center" Padding="80, 0"> 
+            <Label Text="NWD" HorizontalOptions="Center" FontSize="50"/>
+            <Entry x:Name="numeroUno" TextColor="Black" PlaceholderColor="Gray" HorizontalTextAlignment="Center" Placeholder="Numero uno" Keyboard="Numeric" BackgroundColor="WhiteSmoke"/>
+            <Entry x:Name="numeroDos" TextColor="Black" PlaceholderColor="Gray" HorizontalTextAlignment="Center" Placeholder="Numero dos" Keyboard="Numeric" BackgroundColor="WhiteSmoke"/>
+            <Button Text="Calculato" Clicked="calculatoro"/>
+            <Label Text="" x:Name="wynikando" HorizontalOptions="Center" FontSize="50"/>
+
+        </VerticalStackLayout>
+    </ContentPage>
+    <ContentPage Title="Gallery" IconImageSource="dotnet_bot.svg">
+        <VerticalStackLayout>
+            <Image x:Name="imago" HeightRequest="500" MaximumHeightRequest="500" Margin="25"/>
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
+                <Button Text="Anterior" Clicked="anterior"/>
+
+                <Button Text="Proximo" Clicked="proximo"/>
+                
+              
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+
+    </ContentPage>
+    <ContentPage Title="IDK CUM" IconImageSource="dotnet_bot.svg">
+        <VerticalStackLayout>
+            
+        <Editor Text="Editor"/>
+        <Label Text="Label"/>
+        <RadioButton/>
+        <TimePicker/>
+        <ProgressBar Progress="0.33" HeightRequest="8"/>
+        <DatePicker/>
+        </VerticalStackLayout>
+
+    </ContentPage>
+
+</TabbedPage>

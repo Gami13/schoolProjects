@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:YetAnotherUselessHomeworkGallery"
+             x:Class="YetAnotherUselessHomeworkGallery.MainPage">
+
+    <ScrollView>
+        <FlexLayout BindableLayout.ItemsSource="{x:Static local:MainPage.images}" Wrap="Wrap" AlignContent="Center" AlignItems="Center" JustifyContent="Center">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+
+                    <Image Source="{Binding}"
+                 HeightRequest="240"
+                       Margin="10">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="tappedImage" BindingContext="{Binding}"
+                              NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+            <Button Text="CLICK ME" Clicked="clickedMe"
+                    Margin="0,0,0,20"/>
+        </FlexLayout>
+
+    </ScrollView>
+
+</ContentPage>

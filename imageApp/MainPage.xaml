@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="imageApp.MainPage">
+
+
+    <VerticalStackLayout Padding="0,20,0,0">
+
+        <Label Text="Domek w górach" FontSize="32" />
+        <Image Source="obraz.jpg"/>
+        <HorizontalStackLayout BackgroundColor="#008080">
+            <Button Text="POLUB" Clicked="increment" BackgroundColor="#008080" TextColor="White"/>
+            <Button Text="USUŃ" Clicked="decrement" BackgroundColor="#008080" TextColor="White"/>
+            <Button Text="ZAPISZ" BackgroundColor="#008080" TextColor="White"/>
+        </HorizontalStackLayout>
+
+        <Label x:Name="likes" Text="5 polubień" HorizontalOptions="End" TextColor="#808080"/>
+        <Line BackgroundColor="#808080"/>
+        <Label TextColor="#808080" FontAttributes="Bold" Text="Opis"/>
+        <Label TextColor="#808080" Text="Odwiedź komfortowy domek w Sudetach, blisko do szlaków turystycznych"/>
+
+    </VerticalStackLayout>
+
+
+</ContentPage>

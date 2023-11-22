@@ -85,6 +85,9 @@ ScaffoldingReadMe.txt
 # StyleCop
 StyleCopReport.xml
 
+#venv python
+*/venv/Lib
+
 # Files built by Visual Studio
 *_i.c
 *_p.c

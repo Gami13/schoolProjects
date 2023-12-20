@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<h1>Hemlo</h1>
+	{% if messages %}
+	<ul>
+		{% for alert in messages %}
+		<li>{{ alert|capfirst }}</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+	{% if not user.is_authenticated %}
+	<a href="{% url 'login'%}">Zaloguj</a>
+
+	{% else %}
+	<a href="{% url 'messages'%}">Wiadomosci</a>
+	<a href="{% url 'logout'%}">Wyloguj</a>
+	{% endif %}
+
+</body>
+
+</html>

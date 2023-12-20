@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+
+	<h2>Dodaj wiadomość</h2>
+	<form action="." method="POST">
+		{% csrf_token %}
+		<input type="text" name="text" />
+		<input type="submit" value="Zapisz" />
+	</form>
+
+	<h2>Lista wiadomości:</h2>
+	<ol>
+		{% for message in messages %}
+		<li>
+			<strong>{{ message.user.username }}</strong> ({{ message.created }}):
+			<br /> {{ message.message }}
+		</li>
+		{% endfor %}
+	</ol>
+
+</body>
+
+</html>

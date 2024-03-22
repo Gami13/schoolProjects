@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="AvaloniaStorageSystem/AvaloniaStorageSystem/App.axaml" value="AvaloniaStorageSystem/AvaloniaStorageSystem.Browser/AvaloniaStorageSystem.Browser.csproj" />
+        <entry key="AvaloniaStorageSystem/AvaloniaStorageSystem/Views/MainView.axaml" value="AvaloniaStorageSystem/AvaloniaStorageSystem.Desktop/AvaloniaStorageSystem.Desktop.csproj" />
+        <entry key="AvaloniaStorageSystem/AvaloniaStorageSystem/Views/MainWindow.axaml" value="AvaloniaStorageSystem/AvaloniaStorageSystem.Browser/AvaloniaStorageSystem.Browser.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

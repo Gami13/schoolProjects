@@ -6,8 +6,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvaloniaStorageSystem.Andro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvaloniaStorageSystem.Desktop", "AvaloniaStorageSystem\AvaloniaStorageSystem.Desktop\AvaloniaStorageSystem.Desktop.csproj", "{8EA0F4B4-D128-4274-9CE7-8D10A9C31F2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvaloniaStorageSystem.iOS", "AvaloniaStorageSystem\AvaloniaStorageSystem.iOS\AvaloniaStorageSystem.iOS.csproj", "{F6011AB6-339C-45D1-A7AC-70C2D5B958DB}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvaloniaStorageSystem.Browser", "AvaloniaStorageSystem\AvaloniaStorageSystem.Browser\AvaloniaStorageSystem.Browser.csproj", "{82480D6F-3A56-4F1B-B0BC-7EEF2BF9304C}"
 EndProject
 Global
@@ -30,12 +28,6 @@ Global
 		{8EA0F4B4-D128-4274-9CE7-8D10A9C31F2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EA0F4B4-D128-4274-9CE7-8D10A9C31F2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EA0F4B4-D128-4274-9CE7-8D10A9C31F2E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F6011AB6-339C-45D1-A7AC-70C2D5B958DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F6011AB6-339C-45D1-A7AC-70C2D5B958DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F6011AB6-339C-45D1-A7AC-70C2D5B958DB}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{F6011AB6-339C-45D1-A7AC-70C2D5B958DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F6011AB6-339C-45D1-A7AC-70C2D5B958DB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F6011AB6-339C-45D1-A7AC-70C2D5B958DB}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{82480D6F-3A56-4F1B-B0BC-7EEF2BF9304C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{82480D6F-3A56-4F1B-B0BC-7EEF2BF9304C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82480D6F-3A56-4F1B-B0BC-7EEF2BF9304C}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -3,32 +3,46 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:AvaloniaStorageSystem.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="1000"
              x:Class="AvaloniaStorageSystem.Views.MainView"
              x:DataType="vm:MainViewModel">
   <Design.DataContext>
-    <!-- This only sets the DataContext for the previewer in an IDE,
-         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
     <vm:MainViewModel />
   </Design.DataContext>
-<StackPanel VerticalAlignment="Center" Margin="25" Spacing="30">
+<StackPanel Spacing="30">
   
-  <TextBlock FontWeight="Black" FontSize="32" Text="Home Storage Management System" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-  <DataGrid CanUserReorderColumns="True" CanUserResizeColumns="True" CanUserSortColumns="True" BorderThickness="1" BorderBrush="Gray" ItemsSource="{Binding Items}" >
+  <TextBlock FontWeight="Black" FontSize="28" Text="Storage System" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+  <DataGrid  RowHeight="42" CanUserReorderColumns="True" CanUserResizeColumns="True" CanUserSortColumns="True" BorderThickness="1" ItemsSource="{Binding Items}" >
     <DataGrid.Columns>
       <DataGridTextColumn  Header="Name" Binding="{Binding Name}" />
-      <DataGridTextColumn Header="Count" Binding="{Binding Count,Mode=TwoWay}" />
+      <DataGridTextColumn Header="Count" Binding="{Binding Count}" />
       <DataGridTemplateColumn  Header="Actions">
         <DataGridTemplateColumn.CellTemplate>
           <DataTemplate>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="4">
+              
             <Button
               HorizontalAlignment="Center"
               HorizontalContentAlignment="Center"
               Background="Green"
-              Command="{Binding Add, Mode=TwoWay }"
-              CommandParameter="{Binding ChangeStep, Mode=TwoWay}"
+              Foreground="White"
+              
+              Command="{Binding Add}"
+              CommandParameter="{Binding ChangeStep}"
               Content="+"
+              
                />
+            <Button
+              HorizontalAlignment="Center"
+              HorizontalContentAlignment="Center"
+              Background="DarkRed"
+              Foreground="White"
+              
+              Command="{Binding Remove }"
+              CommandParameter="{Binding ChangeStep}"
+              Content="-"
+              />
+            </StackPanel>
           </DataTemplate>
         </DataGridTemplateColumn.CellTemplate>
       </DataGridTemplateColumn>

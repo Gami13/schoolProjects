@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Avalonia;
@@ -13,14 +15,7 @@ using MsBox.Avalonia.Enums;
 
 namespace AvaloniaStorageSystem.ViewModels;
 
-public class StorageItemSerialization(string name, bool isCritical, int count, int categoryIdx, int criticalCount)
-{
-    public string Name = name;
-    public bool IsCritical = isCritical;
-    public int Count = count;
-    public int CategoryIdx = categoryIdx;
-    public int CriticalCount = criticalCount;
-}
+public record StorageItemSerialization(string Name, bool IsCritical, int Count, int CategoryIdx, int CriticalCount);
 
 public class StorageItem : INotifyPropertyChanged
 {
@@ -96,18 +91,18 @@ public class MainViewModel : ViewModelBase
 
     public MainViewModel()
     {
-        Categories =
-        [
-            new Category("Drinks", 5),
-            new Category("Food", 3),
-            new Category("Other", 0)
-        ];
-        Items =
-        [
-            new StorageItem("Coca-Cola 0.5L", 0, 10, Categories[0]),
-            new StorageItem("Pepsi 0.5L", 0, 5, Categories[0]),
-            new StorageItem("Fanta 0.5L", 0, 7, Categories[0]),
-        ];
+        // Categories =
+        // [
+        //     new Category("Drinks", 5),
+        //     new Category("Food", 3),
+        //     new Category("Other", 0)
+        // ];
+        // Items =
+        // [
+        //     new StorageItem("Coca-Cola 0.5L", 0, 10, Categories[0]),
+        //     new StorageItem("Pepsi 0.5L", 0, 5, Categories[0]),
+        //     new StorageItem("Fanta 0.5L", 0, 7, Categories[0]),
+        // ];
         Load();
         Debug.WriteLine("HELLO");
     }
@@ -117,8 +112,7 @@ public class MainViewModel : ViewModelBase
         var filePath =
             Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                 "data.json");
-        MessageBoxManager.GetMessageBoxStandard("Saved", "Data saved to " + filePath, ButtonEnum.Ok).ShowAsync();
-        Debug.WriteLine("Saving to: " + filePath);
+
         using (StreamWriter writer = new StreamWriter(filePath))
         {
             writer.WriteLine(JsonSerializer.Serialize(Items));
@@ -135,25 +129,25 @@ public class MainViewModel : ViewModelBase
             var filePath =
                 Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                     "data.json");
-            Debug.WriteLine("Loading from: " + filePath);
+
             if (!File.Exists(filePath)) return;
             using var reader = new StreamReader(filePath);
 
-            var items = JsonSerializer.Deserialize<ObservableCollection<StorageItemSerialization>>(reader.ReadLine());
-           
+            var items = JsonSerializer.Deserialize<List<StorageItemSerialization>>(reader.ReadLine());
+
             Categories = JsonSerializer.Deserialize<ObservableCollection<Category>>(reader.ReadLine());
+
             var newItems = new ObservableCollection<StorageItem>();
-            foreach (var item in items)
+
+            foreach (var newItem in items.Select(item => new StorageItem
+                     {
+                         Name = item.Name,
+                         Count = item.Count,
+                         CategoryIdx = item.CategoryIdx,
+                         IsCritical = item.IsCritical,
+                         CriticalCount = item.CriticalCount
+                     }))
             {
-                Debug.WriteLine("ITEM: " + item.Name);
-                var newItem = new StorageItem
-                {
-                    Name = item.Name,
-                    Count = item.Count,
-                    CategoryIdx = item.CategoryIdx,
-                    IsCritical = item.IsCritical,
-                    CriticalCount = item.CriticalCount
-                };
                 newItems.Add(newItem);
             }
 
@@ -162,6 +156,7 @@ public class MainViewModel : ViewModelBase
         catch (Exception e)
         {
             Debug.WriteLine("ERROR " + e.Message);
+            throw e;
         }
     }
 }

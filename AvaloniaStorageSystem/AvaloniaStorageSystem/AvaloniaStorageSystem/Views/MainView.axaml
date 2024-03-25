@@ -5,50 +5,144 @@
              xmlns:vm="clr-namespace:AvaloniaStorageSystem.ViewModels"
              mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="1000"
              x:Class="AvaloniaStorageSystem.Views.MainView"
-             x:DataType="vm:MainViewModel">
-  <Design.DataContext>
-    <vm:MainViewModel />
-  </Design.DataContext>
-<StackPanel Spacing="30">
-  
-  <TextBlock FontWeight="Black" FontSize="28" Text="Storage System" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-  <DataGrid  RowHeight="42" CanUserReorderColumns="True" CanUserResizeColumns="True" CanUserSortColumns="True" BorderThickness="1" ItemsSource="{Binding Items}" >
-    <DataGrid.Columns>
-      <DataGridTextColumn  Header="Name" Binding="{Binding Name}" />
-      <DataGridTextColumn Header="Count" Binding="{Binding Count}" />
-      <DataGridTemplateColumn  Header="Actions">
-        <DataGridTemplateColumn.CellTemplate>
-          <DataTemplate>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="4">
-              
-            <Button
-              HorizontalAlignment="Center"
-              HorizontalContentAlignment="Center"
-              Background="Green"
-              Foreground="White"
-              
-              Command="{Binding Add}"
-              CommandParameter="{Binding ChangeStep}"
-              Content="+"
-              
-               />
-            <Button
-              HorizontalAlignment="Center"
-              HorizontalContentAlignment="Center"
-              Background="DarkRed"
-              Foreground="White"
-              
-              Command="{Binding Remove }"
-              CommandParameter="{Binding ChangeStep}"
-              Content="-"
-              />
-            </StackPanel>
-          </DataTemplate>
-        </DataGridTemplateColumn.CellTemplate>
-      </DataGridTemplateColumn>
-    </DataGrid.Columns>
-  </DataGrid>
-</StackPanel>
-  
-  
+             x:DataType="vm:MainViewModel"
+             x:Name="Parent">
+    <Design.DataContext>
+        <vm:MainViewModel />
+    </Design.DataContext>
+    <StackPanel Spacing="16" Margin="0,16">
+
+        <ComboBox IsVisible="False" x:Name="CategoriesBox"
+                  ItemsSource="{Binding Categories}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <TextBlock FontWeight="Black" FontSize="28" Text="Storage System" HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
+        <StackPanel Spacing="12" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Button Content="Add new Item" Height="48" VerticalContentAlignment="Center"
+                    HorizontalContentAlignment="Center" FontWeight="Bold" Padding="16, 0">
+                <Button.Flyout>
+                    <Flyout>
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="16" Width="240" Height="220">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="24" HorizontalAlignment="Center">
+                                <TextBlock VerticalAlignment="Center" Text="Name:" /> <TextBox x:Name="addName"></TextBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="24" HorizontalAlignment="Center">
+                                <TextBlock VerticalAlignment="Center" Text="Category:" />
+                                <ComboBox x:Name="addCategory"
+
+                                    ItemsSource="{Binding #CategoriesBox.ItemsSource}">
+
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding x:DataType=vm:Category,  Path=Name }" />
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="24" HorizontalAlignment="Center">
+                                <TextBlock VerticalAlignment="Center" Text="Count:" /> <NumericUpDown x:Name="addCount" Minimum="0" Value="0" FormatString="0"/>
+                            </StackPanel>
+                            <Button Content="Add" Width="120" HorizontalAlignment="Center" Click="Button_OnClick" />
+
+                        </StackPanel>
+                    </Flyout>
+                </Button.Flyout>
+            </Button>
+            <Button Content="Add new Category" Height="48" VerticalContentAlignment="Center"
+                    HorizontalContentAlignment="Center" FontWeight="Bold" Padding="16, 0">
+                <Button.Flyout>
+                    <Flyout>
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="16" Width="240" Height="220">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="24" HorizontalAlignment="Center">
+                                <TextBlock VerticalAlignment="Center" Text="Name:" /> <TextBox x:Name="newCategory"></TextBox>
+                            </StackPanel>
+                            
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="24" HorizontalAlignment="Center">
+                                <TextBlock VerticalAlignment="Center" Text="Critical:" /> <NumericUpDown x:Name="newCritical" Minimum="0" Value="0" FormatString="0"/>
+                            </StackPanel>
+                            <Button Content="Add" Width="120" HorizontalAlignment="Center" Click="CategoryButton_OnClick" />
+
+                        </StackPanel>
+                    </Flyout>
+                </Button.Flyout>
+            </Button>
+            <Button Content="Save" Height="48" VerticalContentAlignment="Center"
+                    HorizontalContentAlignment="Center" FontWeight="Bold" Padding="16, 0" Click="Save"/>
+
+        </StackPanel>
+        <DataGrid x:Name="ItemList" RowHeight="48" CanUserReorderColumns="True" CanUserResizeColumns="True" CanUserSortColumns="True"
+                  BorderThickness="1" ItemsSource="{Binding Items}">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTemplateColumn Header="Category">
+                    <DataGridTemplateColumn.CellTemplate>
+
+                        <DataTemplate>
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <ComboBox
+                                    SelectionChanged="SelectingItemsControl_OnSelectionChanged"
+
+                                    ItemsSource="{Binding #CategoriesBox.ItemsSource}"
+                                    SelectedIndex="{Binding CategoryIdx}">
+
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding x:DataType=vm:Category,  Path=Name }" />
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Count" Binding="{Binding Count}" />
+                <DataGridTemplateColumn Header="Actions">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="4">
+
+                                <Button
+                                    HorizontalAlignment="Center"
+                                    HorizontalContentAlignment="Center"
+                                    Background="Green"
+                                    Foreground="White"
+
+                                    Command="{Binding Add}"
+
+                                    Content="+" Width="32" />
+                                <Button
+                                    HorizontalAlignment="Center"
+                                    HorizontalContentAlignment="Center"
+                                    Background="DarkRed"
+                                    Foreground="White"
+                                    Width="32"
+                                    Command="{Binding Remove }"
+
+                                    Content="-" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Warnings">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="Critical" FontWeight="Bold" VerticalAlignment="Center"
+                                       HorizontalAlignment="Center" Foreground="Red"
+                                       IsVisible="{Binding !!IsCritical, Mode=TwoWay}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+
+
 </UserControl>

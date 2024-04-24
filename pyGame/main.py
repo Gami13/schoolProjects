@@ -89,7 +89,14 @@ while run:
 	
 	handleKeys(keys)
 
-	window.fill((24, 164, 240))  
+	window.fill((24, 164, 240))
+	#checkerboard pattern, black and purplke
+	for i in range(0, window_width, 100):
+		for j in range(0, window_height, 100):
+			if (i // 100 + j // 100) % 2 == 0:
+				pygame.draw.rect(window, (0, 0, 0), pygame.rect.Rect(i, j, 100, 100))
+			else:
+				pygame.draw.rect(window, (128, 0, 128), pygame.rect.Rect(i, j, 100, 100))
 	pygame.draw.rect(window, (20, 200, 20), pygame.rect.Rect(pOne.x, pOne.y, pOne.size, pOne.size))  
 	pygame.draw.rect(window, (200, 20, 20), pygame.rect.Rect(pTwo.x, pTwo.y, pTwo.size, pTwo.size))  
 	for apple in apples:

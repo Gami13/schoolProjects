@@ -1,0 +1,67 @@
+﻿<Window x:Class="EgzaminDesktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EgzaminDesktop"
+        mc:Ignorable="d"
+        Background="CadetBlue"
+        Title="MainWindow" Height="320" Width="560">
+    <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Vertical"  Margin="25" HorizontalAlignment="Center" Width="240">
+            <Label Width="250">
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                    <TextBlock Text="Numer"/>
+
+                    <TextBox Width="150" TextChanged="NumberInput" Margin="40 0 0 0" />
+                </StackPanel>
+            </Label>
+            <Label Width="250">
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+
+                    <TextBlock Text="Imię" />
+                    <TextBox Width="150" Margin="55 0 0 0" TextChanged="NameInput" />
+                </StackPanel>
+            </Label>
+            <Label Width="250">
+
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+
+                    <TextBlock Text="Nazwisko" />
+                    <TextBox Width="150" Margin="28 0 0 0" TextChanged="LastNameInput"/>
+                </StackPanel>
+            </Label>
+            <GroupBox Header="Kolor Oczu" Padding="10" VerticalAlignment="Center" VerticalContentAlignment="Center">
+                <StackPanel Orientation="Vertical">
+
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton Checked="BlueEyes" Margin="0 0 10 10 "  GroupName="eyes" IsChecked="True"/>
+                        <TextBlock Text="Niebieskie"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+
+                        <RadioButton Checked="GreenEyes" Margin="0 0 10 10 " GroupName="eyes"  />
+                        <TextBlock Text="Zielone"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+
+
+                        <RadioButton Checked="BeerEyes" GroupName="eyes" Margin="0 0 10 0 " />
+                        <TextBlock Text="Piwne"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Width="240" Margin="25" >
+            <StackPanel Orientation="Horizontal">
+                
+                <Image x:Name="PersonImage" Stretch="Fill" Margin="0 0 30 0" Source="" Height="140" Width="90"/>
+                <Image x:Name="FingerprintImage" Stretch="Fill" Source="" Height="140" Width="90"/>
+            </StackPanel>
+            <Button Click="ButtonBase_OnClick" Margin="0 30 25 0">
+                <TextBlock Padding="0 5" Text="OK" />
+            </Button>
+        </StackPanel>
+
+    </StackPanel>
+</Window>

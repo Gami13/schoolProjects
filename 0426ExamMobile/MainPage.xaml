@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="_0426ExamMobile.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="15">
+
+            <HorizontalStackLayout Margin="10">
+
+                <Label Text="Bok A"   VerticalTextAlignment="Center" Margin="0 10 0 0"/>
+                <Editor x:Name="SideA" WidthRequest="100" VerticalTextAlignment="Center"/>
+
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Margin="10">
+                <Label Text="Bok B"   VerticalTextAlignment="Center" Margin="0 10 0 0"/>
+                <Editor x:Name="SideB" WidthRequest="100" VerticalTextAlignment="Center"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Margin="10">
+                <Label Text="Bok C"  VerticalTextAlignment="Center" Margin="0 10 0 0"/>
+                <Editor x:Name="SideC" WidthRequest="100" VerticalTextAlignment="Center"/>
+            </HorizontalStackLayout>
+            <Button Clicked="OnCalculate" Text="Policz" WidthRequest="200"/>
+            <Label x:Name="OutputField" Margin="10 0 0 0"/>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

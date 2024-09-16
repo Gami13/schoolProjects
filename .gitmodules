@@ -1,0 +1,3 @@
+[submodule "FitnessTracker"]
+	path = FitnessTracker
+	url = https://github.com/Gami13/FitnessTracker.git

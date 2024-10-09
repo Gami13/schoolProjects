@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="DiceRollerMobile.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <StackLayout Spacing="12"
+                 BackgroundColor="Beige">
+        <Label
+            Padding="4"
+            BackgroundColor="Brown"
+            FontSize="32"
+            HorizontalOptions="FillAndExpand"
+            Text="Gra w kości. Autor: Gami"/>
+        <Button
+            BackgroundColor="Chocolate"
+            TextColor="White"
+            Clicked="RollDice"
+            WidthRequest="196"
+            Text="RZUĆ KOŚĆMI"/>
+        <StackLayout Orientation="Horizontal"
+                     BackgroundColor="White"
+                     Spacing="8"
+                     HorizontalOptions="FillAndExpand"
+                Padding="8">
+            <Image
+                x:Name="dice0"
+                HeightRequest="75"
+                Source="question.png"
+                WidthRequest="75"/>
+            <Image
+                x:Name="dice1"
+                HeightRequest="75"
+                Source="question.png"
+                WidthRequest="75"/>
+            <Image
+                x:Name="dice2"
+                HeightRequest="75"
+                Source="question.png"
+                WidthRequest="75"/>
+            <Image
+                x:Name="dice3"
+                HeightRequest="75"
+                Source="question.png"
+                WidthRequest="75"/>
+            <Image
+                x:Name="dice4"
+                HeightRequest="75"
+                Source="question.png"
+                WidthRequest="75"/>
+        </StackLayout>
+        <Label TextColor="Black"
+               x:Name="RollResult"
+               HorizontalOptions="Center"
+               Text="Wynik tego losowania: "/>
+        <Label TextColor="Black"
+               x:Name="GameResult"
+               HorizontalOptions="Center"
+               Text="Wynik gry: "/>
+        <Button TextColor="White"
+                BackgroundColor="Chocolate"
+                Clicked="ResetGame"
+                WidthRequest="196"
+                Text="RESETUJ WYNIK"/>
+
+    </StackLayout>
+
+</ContentPage>

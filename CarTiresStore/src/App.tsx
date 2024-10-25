@@ -1,6 +1,9 @@
-import { useEffect, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useContext, useEffect } from 'react';
+import { CartSheet } from './CartSheet.tsx';
 import { DataTable } from './DataTable/DataTable.tsx';
 import { TableColumns } from './DataTable/DataTableColumns.tsx';
+import { AppState } from './Main.tsx';
 import carData from './cars.json';
 import { calculateTirePrice } from './utils.tsx';
 type Tire = {
@@ -39,8 +42,14 @@ export type TireFlat = {
   width: number;
   price: number;
 };
+export type CartItem = {
+  id: number;
+  amount: number;
+};
+
 export function App() {
-  const [carList, setCarList] = useState<TireFlat[]>([]);
+  const State = useContext(AppState);
+  // biome-ignore lint/correctness/useExhaustiveDependencies: its used as an onMount
   useEffect(() => {
     let idCounter = 0;
     //converts the carData to TireFlat
@@ -75,11 +84,12 @@ export function App() {
       });
     });
     console.log(tireFlat);
-    setCarList(tireFlat);
+    State.setTireList(tireFlat);
   }, []);
   return (
     <div className="p-24 h-screen">
-      <DataTable columns={TableColumns} data={carList} />
+      <CartSheet />
+      <DataTable columns={TableColumns(State)} data={State.tireList} />
     </div>
   );
 }

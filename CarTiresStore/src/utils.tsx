@@ -1,3 +1,6 @@
+import type { TireFlat } from './App';
+import { AppStateType } from './Main';
+
 type TireParams = {
   year: number;
   bar: number;
@@ -51,14 +54,42 @@ export function calculateTirePrice(params: TireParams): number {
   return totalPrice;
 }
 
-// in order to work 'Math.seed' must NOT be undefined,
-// so in any case, you HAVE to provide a Math.seed
 export function seededRand(seed: number, min: number, max: number) {
-  max = max || 1;
-  min = min || 0;
+  const newMax = max || 1;
+  const newMin = min || 0;
 
-  seed = (seed * 9301 + 49297) % 233280;
-  const rnd = seed / 233280;
+  const newSeed = (seed * 9301 + 49297) % 233280;
+  const rnd = newSeed / 233280;
 
-  return min + rnd * (max - min);
+  return min + rnd * (newMax - newMin);
+}
+
+//TODO: Gami fix this, you need to completely remove item and add it again
+export function addToCart(state: AppStateType, tireId: number): void {
+  const cartItems = state.cartItems;
+  const tire = getTire(state.tireList, tireId);
+  if (!tire) return;
+  const itemIdx = state.cartItems.findIndex((item) => item.id === tireId);
+  if (itemIdx !== -1) {
+    cartItems[itemIdx].amount += 1;
+  } else {
+    cartItems.push({ id: tireId, amount: 1 });
+  }
+  state.setCartItems([...cartItems]);
+}
+export function removeFromCart(state: AppStateType, tireId: number): void {
+  const cartItems = state.cartItems;
+  const itemIdx = state.cartItems.findIndex((item) => item.id === tireId);
+  if (itemIdx !== -1) {
+    cartItems[itemIdx].amount -= 1;
+    if (cartItems[itemIdx].amount === 0) {
+      cartItems.splice(itemIdx, 1);
+    }
+    state.setCartItems([...cartItems]);
+  }
+}
+export function getTire(tires: TireFlat[], tireId: number): TireFlat | false {
+  const tire = tires.find((tire) => tire.id === tireId);
+  if (tire) return tire;
+  return false;
 }

@@ -10,14 +10,23 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { ShoppingCartIcon } from 'lucide-react';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AppState } from './Main';
 import { addToCart, getTire, removeFromCart } from './utils';
 
 export function CartSheet() {
   const State = useContext(AppState);
+  const [total, setTotal] = useState(0);
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
-    console.log('Łefekt', State.cartItems);
+    let newTotal = 0;
+    for (const item of State.cartItems) {
+      const tire = getTire(State.tireList, item.id);
+      if (!tire) return null;
+      newTotal += tire.price * item.amount;
+    }
+    setTotal(newTotal);
   }, [State.cartItems]);
 
   return (
@@ -29,7 +38,7 @@ export function CartSheet() {
       </SheetTrigger>
       <SheetContent className="flex justify-between flex-col">
         <SheetHeader>
-          <SheetTitle>Your Cart</SheetTitle>
+          <SheetTitle>Your Cart - Total: ${total}</SheetTitle>
           <SheetDescription>
             Make changes to your cart, or proceed to checkout.
           </SheetDescription>
@@ -42,15 +51,22 @@ export function CartSheet() {
             {State.cartItems.map((item, index) => {
               const tire = getTire(State.tireList, item.id);
               if (!tire) return null;
+
               return (
                 <>
-                  <li className="flex  w-full justify-between " key={item.id}>
-                    <span className="align-middle flex justify-center items-center">
-                      {tire.make} {tire.model} | {tire.width}/{tire.thickness}R
-                      {tire.radius}
+                  <li
+                    className="flex gap-1 w-full justify-between items-center "
+                    key={item.id}
+                  >
+                    <span className="align-middle flex justify-start items-end gap-1 h-fit w-3/6">
+                      {tire.width}/{tire.thickness}R{tire.radius}
+                      <small className=" text-slate-400 h-full">
+                        {tire.make} {tire.model}
+                      </small>
                     </span>
-                    <div className="flex gap-1 ">
+                    <div className="flex gap-1 w-2/6 items-center">
                       <Button
+                        className="w-8 h-8"
                         onClick={() => {
                           removeFromCart(State, item.id);
                         }}
@@ -58,10 +74,11 @@ export function CartSheet() {
                       >
                         -
                       </Button>
-                      <span className="rounded-xl flex justify-center items-center bg-secondary h-full aspect-square ">
+                      <span className="rounded-xl flex justify-center items-center bg-secondary h-10 w-10 ">
                         {item.amount}
                       </span>
                       <Button
+                        className="w-8 h-8"
                         onClick={() => {
                           addToCart(State, item.id);
                         }}
@@ -70,6 +87,9 @@ export function CartSheet() {
                         +
                       </Button>
                     </div>
+                    <span className="w-1/6 flex justify-end">
+                      ${tire.price * item.amount}
+                    </span>
                   </li>
                   {index !== State.cartItems.length - 1 && (
                     <li
